@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  backend:
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    container_name: ${STACK_NAME?Variable not set}-backend
+    restart: on-failure
+    build:
+      context: ./src/backend
+      dockerfile: backend.dockerfile
+      args:
+        INSTALL_DEV: ${INSTALL_DEV-false}
+    volumes:
+      - static_volume:/app/static
+      - ./src/backend/sqlite.db:/app/sqlite.db
+    env_file:
+      - .env
+    environment:
+      - SERVER_NAME=${DOMAIN?Variable not set}
+      - SERVER_HOST=https://${DOMAIN?Variable not set}d
+      # Allow explicit env var override for tests
+      - SMTP_HOST=${SMTP_HOST}
+
+
+volumes:
+  static_volume:

@@ -1,0 +1,62 @@
+{% extends 'dashboard/layout/content.html' %}
+
+
+{% block content %}
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <!-- Post Content
+            ============================================= -->
+            <div class="row clearfix">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{ _('Id') }}</th>
+                        <th>{{ _('Title') }}</th>
+                        <th>{{ _('Email') }}</th>
+                        <th>{{ _('Created at') }}</th>
+                        <th>{{ _('Actions') }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for object in object_list %}
+
+                        <tr>
+                            <td>{{ object.id }}</td>
+                            <td>{{ object.title }}</td>
+                            <td>{{ object.email }}</td>
+
+                            <td>{{ object.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{ _("Actions") }}
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item"
+                                           href="{{ url_for('message-detail-page', obj_id=object.id) }}">{{ _('View') }}</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+
+
+            </div><!-- .postcontent end -->
+
+            <div class="row">
+                <div class="col">
+                    {% include 'partials/pagination.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

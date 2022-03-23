@@ -1,0 +1,24 @@
+{% extends 'frontend/layout/main.html' %}
+
+
+
+{% block app_js %}
+    {{ super() }}
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "positionClass": "toast-bottom-left",
+            "progressBar": true,
+            "preventDuplicates": false,
+            "showDuration": "400",
+            "hideDuration": "1000",
+        };
+        {% set messages = get_flashed_messages(request) %}
+
+        {% if messages %}
+            {% for message in messages %}
+                toastr['{{ message.category }}']('{{ message.message }}');
+            {% endfor %}
+        {% endif %}
+    </script>
+{% endblock %}

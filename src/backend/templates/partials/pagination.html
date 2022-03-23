@@ -1,0 +1,37 @@
+{% set pages = get_page_total(total, limit) %}
+
+
+
+
+
+<div class="col-lg-auto order-2 order-lg-3 mb-3 mb-lg-0">
+
+
+
+    <div class="pagination-wrapper">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination pagination-modern pagination-modern-spacing justify-content-center justify-content-lg-start mb-0">
+                <li class="page-item">
+                    <a class="page-link prev" href="{{ include_query_params(request.url, {'page': page-1}) }}"
+                       {% if page==1 %}disabled="" {% endif %}
+                       aria-label="{{ gettext('Previous') }}">
+                        <span>
+                            <span aria-hidden="true">«</span>
+                        </span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <button type="button" class="page-link" disabled> {{ page }} </button>
+                </li>
+                <li class="page-item">
+                    <a class="page-link disabled next"
+                       href="{{ include_query_params(request.url, {'page': page + 1}) }}"
+                       aria-label="{{ gettext('Next') }}" {% if page >= pages %}disabled {% endif %}>
+
+                            <span aria-hidden="true">»</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

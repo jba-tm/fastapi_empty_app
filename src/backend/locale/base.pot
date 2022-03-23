@@ -1,0 +1,376 @@
+# Translations template for PROJECT.
+# Copyright (C) 2022 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2022-02-23 11:46+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Jumageldiyew Batyr <jumageldiyewb@list.ru>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.9.1\n"
+
+#: app/contrib/auth/forms.py:6 app/contrib/contact_us/forms.py:15
+#: app/contrib/dashboard/forms.py:13 app/contrib/dashboard/forms.py:28
+#: app/contrib/dashboard/forms.py:41
+#: templates/dashboard/auth/email/detail_view.html:20
+#: templates/dashboard/auth/email/list_view.html:19
+#: templates/dashboard/auth/user/detail_view.html:20
+#: templates/dashboard/auth/user/list_view.html:20
+#: templates/dashboard/config/detail_view.html:27
+#: templates/dashboard/message/detail_view.html:25
+#: templates/dashboard/message/list_view.html:19
+msgid "Email"
+msgstr ""
+
+#: app/contrib/auth/forms.py:7 app/contrib/dashboard/forms.py:15
+#: app/contrib/dashboard/forms.py:23
+msgid "Password"
+msgstr ""
+
+#: app/contrib/auth/routers.py:32
+msgid "You are signed in"
+msgstr ""
+
+#: app/contrib/auth/routers.py:77
+msgid "Incorrect email or password"
+msgstr ""
+
+#: app/contrib/auth/routers.py:81 app/contrib/auth/routers.py:93
+#: app/contrib/auth/routers.py:117 templates/dashboard/auth/login.html:49
+msgid "Login"
+msgstr ""
+
+#: app/contrib/auth/routers.py:137
+msgid "Your are logged out"
+msgstr ""
+
+#: app/contrib/contact_us/forms.py:9
+#: templates/dashboard/message/detail_view.html:17
+msgid "Fullname"
+msgstr ""
+
+#: app/contrib/contact_us/forms.py:10 app/contrib/dashboard/forms.py:38
+#: templates/dashboard/config/detail_view.html:23
+#: templates/dashboard/message/detail_view.html:21
+msgid "Company name"
+msgstr ""
+
+#: app/contrib/contact_us/forms.py:11
+#: templates/dashboard/message/detail_view.html:33
+#: templates/dashboard/message/list_view.html:18
+msgid "Title"
+msgstr ""
+
+#: app/contrib/contact_us/forms.py:12
+#: templates/dashboard/message/detail_view.html:37
+msgid "Body"
+msgstr ""
+
+#: app/contrib/contact_us/forms.py:19 app/contrib/dashboard/forms.py:43
+#: templates/dashboard/config/detail_view.html:31
+#: templates/dashboard/message/detail_view.html:29
+msgid "Phone number"
+msgstr ""
+
+#: app/contrib/contact_us/routers.py:41
+msgid "Message successfully sent"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:27
+#: templates/dashboard/auth/email/detail_view.html:24
+#: templates/dashboard/auth/email/list_view.html:20
+#: templates/dashboard/auth/user/detail_view.html:24
+msgid "Is active"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:36
+#: templates/dashboard/config/detail_view.html:19
+msgid "Site name"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:37
+msgid "Seo description"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:39
+#: templates/dashboard/config/detail_view.html:35
+msgid "Address"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:46
+#: templates/dashboard/config/detail_view.html:43
+msgid "Counter line value 1"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:47
+#: templates/dashboard/config/detail_view.html:47
+msgid "Counter line name 1"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:49
+#: templates/dashboard/config/detail_view.html:51
+msgid "Counter line value 2"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:50
+#: templates/dashboard/config/detail_view.html:55
+msgid "Counter line name 2"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:52
+#: templates/dashboard/config/detail_view.html:59
+msgid "Counter line value 3"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:53
+#: templates/dashboard/config/detail_view.html:63
+msgid "Counter line name 3"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:55
+#: templates/dashboard/config/detail_view.html:67
+msgid "Counter line value 4"
+msgstr ""
+
+#: app/contrib/dashboard/forms.py:56
+#: templates/dashboard/config/detail_view.html:71
+msgid "Counter line name 4"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:39
+#: templates/dashboard/layout/content.html:32
+msgid "Users"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:59 app/contrib/dashboard/routers.py:87
+msgid "Create user"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:80
+msgid "User successfully created"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:102 app/contrib/dashboard/routers.py:124
+#: app/contrib/dashboard/routers.py:148 app/contrib/dashboard/routers.py:181
+msgid "User does not exist"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:110
+#, python-format
+msgid "User: %(model)s"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:132 app/contrib/dashboard/routers.py:166
+#, python-format
+msgid "Edit user: %(model)s"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:158
+msgid "User successfully updated"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:184
+msgid "You can't delete yourself"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:186
+msgid "User successfully deleted"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:210
+#: templates/dashboard/layout/content.html:36
+msgid "Emails"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:230 app/contrib/dashboard/routers.py:258
+msgid "Add email"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:250
+msgid "Email successfully created"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:272 app/contrib/dashboard/routers.py:294
+#: app/contrib/dashboard/routers.py:319 app/contrib/dashboard/routers.py:352
+msgid "Email does not exist"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:277
+#, python-format
+msgid "Email: %(model)s"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:302 app/contrib/dashboard/routers.py:336
+#, python-format
+msgid "Update email: %(model)s"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:329
+msgid "Email successfully updated"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:355
+msgid "Email successfully deleted"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:379
+#: templates/dashboard/layout/content.html:39
+msgid "Messages"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:397
+msgid "Message does not exist"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:404
+#, python-format
+msgid "Message: %(model)s"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:417 app/contrib/dashboard/routers.py:439
+#: app/contrib/dashboard/routers.py:475
+msgid "Config created"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:423
+msgid "Site configuration"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:425
+#: templates/dashboard/auth/email/detail_view.html:14
+#: templates/dashboard/auth/email/list_view.html:41
+#: templates/dashboard/auth/user/detail_view.html:14
+#: templates/dashboard/auth/user/list_view.html:40
+#: templates/dashboard/config/detail_view.html:11
+msgid "Edit"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:447 app/contrib/dashboard/routers.py:509
+msgid "Update site configuration"
+msgstr ""
+
+#: app/contrib/dashboard/routers.py:500
+msgid "Site configuration successfully updated"
+msgstr ""
+
+#: app/core/authentication.py:32
+msgid "Empty fullname"
+msgstr ""
+
+#: app/core/authentication.py:73
+msgid "Could not validate credentials"
+msgstr ""
+
+#: app/core/exceptions.py:11
+msgid "Un authenticated"
+msgstr ""
+
+#: app/core/forms.py:33
+msgid "Already exists."
+msgstr ""
+
+#: app/core/forms.py:46 app/core/forms.py:49
+msgid "Please provide a valid mobile phone number"
+msgstr ""
+
+#: app/utils/emails.py:68
+#, python-format
+msgid "%(site_name)s - contact messages"
+msgstr ""
+
+#: templates/dashboard/auth/login.html:19
+msgid "Login to your Account"
+msgstr ""
+
+#: templates/dashboard/auth/login.html:23
+#: templates/frontend/home/index.html:688
+msgid "You have submitted an invalid CSRF token"
+msgstr ""
+
+#: templates/dashboard/auth/email/create_view.html:41
+#: templates/dashboard/auth/email/update_view.html:41
+#: templates/dashboard/auth/user/create_view.html:42
+#: templates/dashboard/auth/user/update_view.html:42
+#: templates/dashboard/config/update_view.html:174
+#: templates/frontend/home/index.html:761
+msgid "Submit"
+msgstr ""
+
+#: templates/dashboard/auth/email/detail_view.html:15
+#: templates/dashboard/auth/email/list_view.html:43
+#: templates/dashboard/auth/user/detail_view.html:15
+#: templates/dashboard/auth/user/list_view.html:42
+msgid "Delete"
+msgstr ""
+
+#: templates/dashboard/auth/email/list_view.html:14
+#: templates/dashboard/auth/user/list_view.html:14
+msgid "Add"
+msgstr ""
+
+#: templates/dashboard/auth/email/list_view.html:18
+#: templates/dashboard/auth/user/list_view.html:19
+#: templates/dashboard/message/list_view.html:17
+msgid "Id"
+msgstr ""
+
+#: templates/dashboard/auth/email/list_view.html:21
+#: templates/dashboard/auth/email/list_view.html:35
+#: templates/dashboard/auth/user/list_view.html:21
+#: templates/dashboard/auth/user/list_view.html:34
+#: templates/dashboard/message/list_view.html:21
+#: templates/dashboard/message/list_view.html:38
+msgid "Actions"
+msgstr ""
+
+#: templates/dashboard/auth/email/list_view.html:39
+#: templates/dashboard/auth/user/list_view.html:38
+#: templates/dashboard/message/list_view.html:42
+msgid "View"
+msgstr ""
+
+#: templates/dashboard/config/detail_view.html:39
+msgid "Location"
+msgstr ""
+
+#: templates/dashboard/layout/content.html:28
+msgid "View site"
+msgstr ""
+
+#: templates/dashboard/layout/content.html:42
+msgid "Site config"
+msgstr ""
+
+#: templates/dashboard/layout/content.html:45
+msgid "Logout"
+msgstr ""
+
+#: templates/dashboard/message/detail_view.html:41
+#: templates/dashboard/message/list_view.html:20
+msgid "Created at"
+msgstr ""
+
+#: templates/frontend/layout/main.html:60
+msgid "Copyrights"
+msgstr ""
+
+#: templates/frontend/layout/main.html:60
+msgid "All Rights Reserved."
+msgstr ""
+
+#: templates/partials/pagination.html:17
+msgid "Previous"
+msgstr ""
+
+#: templates/partials/pagination.html:29
+msgid "Next"
+msgstr ""
+

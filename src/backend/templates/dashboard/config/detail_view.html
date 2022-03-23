@@ -1,0 +1,84 @@
+{% extends 'dashboard/layout/content.html' %}
+
+
+
+{% block content %}
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+            <a href="{{ url_for('config-update-page', ) }}"
+               class="button button-large button-circle button-green"><i class="icon-edit"></i>{{ _('Edit') }}</a>
+
+            <!-- Post Content
+            ============================================= -->
+            <div class="row clearfix">
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>{{ _('Site name') }}</td>
+                        <td>{{ object.site_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Company name') }}</td>
+                        <td>{{ object.company_name }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Seo description') }}</td>
+                        <td>{{ object.seo_description }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Email') }}</td>
+                        <td>{{ object.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Phone number') }}</td>
+                        <td>{{ object.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Address') }}</td>
+                        <td>{{ object.address }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Location') }}</td>
+                        <td>{{ object.location }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Counter line value 1') }}</td>
+                        <td>{{ object.counter_line_value_1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Counter line name 1') }}</td>
+                        <td>{{ object.counter_line_name_1 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Counter line value 2') }}</td>
+                        <td>{{ object.counter_line_value_2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Counter line name 2') }}</td>
+                        <td>{{ object.counter_line_name_2 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Counter line value 3') }}</td>
+                        <td>{{ object.counter_line_value_3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Counter line name 3') }}</td>
+                        <td>{{ object.counter_line_name_3 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Counter line value 4') }}</td>
+                        <td>{{ object.counter_line_value_4 }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Counter line name 4') }}</td>
+                        <td>{{ object.counter_line_name_4 }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div><!-- .postcontent end -->
+        </div>
+    </div>
+{% endblock %}

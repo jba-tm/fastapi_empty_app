@@ -1,0 +1,94 @@
+{% extends 'dashboard/layout/main.html' %}
+
+{% block body_class %}stretched side-header{% endblock %}
+{% block header_section %}
+<!-- Header
+		============================================= -->
+		<header id="header" class="no-sticky">
+
+			<div id="header-wrap">
+
+				<div class="container clearfix">
+
+					<div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
+
+					<!-- Logo
+					============================================= -->
+					<div id="logo" class="nobottomborder">
+						<a href="{{ url_for('user-list-page') }}" class="standard-logo" data-dark-logo="images/logo-side-dark.png"><img src="images/logo-side.png" alt=""></a>
+						<a href="{{ url_for('user-list-page') }}" class="retina-logo" data-dark-logo="images/logo-side-dark@2x.png"><img src="images/logo-side@2x.png" alt=""></a>
+					</div><!-- #logo end -->
+
+					<!-- Primary Navigation
+					============================================= -->
+					<nav id="primary-menu">
+
+						<ul>
+							<li  >
+                                <a href="{{ url_for('home-page') }}"><div> {{ _('View site') }}</div></a>
+
+							</li>
+							<li class="{{ 'current' if request.url == url_for('user-list-page') else  '' }}">
+                                <a href="{{ url_for('user-list-page') }}"><div> {{ _('Users') }}</div></a>
+
+							</li>
+                            <li class="{{ 'current' if request.url == url_for('email-list-page') else  '' }}">
+                                <a href="{{ url_for('email-list-page') }}">{{ _('Emails') }}</a>
+                            </li>
+                            <li class="{{ 'current' if request.url == url_for('message-list-page') else  '' }}">
+                                <a href="{{ url_for('message-list-page') }}">{{ _('Messages') }}</a>
+                            </li>
+                            <li class="{{ 'current' if request.url == url_for('config-detail-page') else  '' }}">
+                                <a href="{{ url_for('config-detail-page') }}">{{ _('Site config') }}</a>
+                            </li>
+                            <li  >
+                                <a href="{{ url_for('logout') }}">{{ _('Logout') }}</a>
+                            </li>
+						</ul>
+
+					</nav><!-- #primary-menu end -->
+
+
+				</div>
+
+			</div>
+
+		</header><!-- #header end -->
+{% endblock %}
+
+
+{% block extra_section %}
+
+		<!-- Page Title
+		============================================= -->
+		<section id="page-title">
+
+			<div class="container clearfix">
+				<h1>{{ title }}</h1>
+			</div>
+
+		</section><!-- #page-title end -->
+{% endblock %}
+
+
+
+{% block app_js %}
+    {{ super() }}
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "positionClass": "toast-top-right",
+            "progressBar": true,
+            "preventDuplicates": false,
+            "showDuration": "400",
+            "hideDuration": "1000",
+        };
+        {% set messages = get_flashed_messages(request) %}
+
+        {% if messages %}
+            {% for message in messages %}
+                toastr['{{ message.category }}']('{{ message.message }}');
+            {% endfor %}
+        {% endif %}
+    </script>
+{% endblock %}

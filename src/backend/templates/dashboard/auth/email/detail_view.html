@@ -1,0 +1,33 @@
+{% extends 'dashboard/layout/content.html' %}
+
+
+
+{% block content %}
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <!-- Post Content
+            ============================================= -->
+            <div class="row clearfix">
+                            <a href="{{ url_for('email-update-page', email_in=object.email) }}" class="button button-large button-circle button-green"><i class="icon-edit"></i>{{ _('Edit') }}</a>
+                            <a href="{{ url_for('email-delete', email_in=object.email) }}" class="button button-large button-circle button-red"><i class="icon-trash"></i>{{ _('Delete') }}</a>
+
+                <table class="table">
+                    <tbody>
+                    <tr>
+                        <td>{{ _('Email') }}</td>
+                        <td>{{ object.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ _('Is active') }}</td>
+                        <td><input type="checkbox" disabled {{ 'checked' if object.is_active else '' }}></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div><!-- .postcontent end -->
+        </div>
+    </div>
+{% endblock %}

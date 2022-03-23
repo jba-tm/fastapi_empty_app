@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block extra_header %}
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Raleway:300,400,500,600,700|Crete+Round:400i"
+          rel="stylesheet" type="text/css"/>
+
+{% endblock %}
+
+
+{% block main_css %}
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css"/>
+
+    <link rel="stylesheet" href="/static/css/style.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/swiper.css" type="text/css"/>
+{#    <link href="/static/css/sass/dark.css" rel="stylesheet" type="text/css"/>#}
+
+    <link rel="stylesheet" href="/static/css/font-icons.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/css/animate.min.css" type="text/css"/>
+{#    <link rel="stylesheet" href="/static/css/magnific-popup.css" type="text/css"/>#}
+
+
+    <link rel="stylesheet" href="/static/css/responsive.min.css" type="text/css"/>
+    <link rel="stylesheet" href="/static/toastr/toastr.min.css" type="text/css"/>
+{% endblock %}
+
+{% block body_class %}stretched{% endblock %}
+
+{% block main_content %}
+
+    <!-- Document Wrapper
+    ============================================= -->
+    <div id="wrapper" class="clearfix">
+        {% block header_section %}
+        {% endblock %}
+
+
+        {% block extra_section %}
+
+        {% endblock %}
+
+        <!-- Content
+        ============================================= -->
+        <section id="content">
+
+            {% block content %}{% endblock %}
+
+        </section><!-- #content end -->
+
+    <!-- Footer
+    ============================================= -->
+    <footer id="footer" class="dark">
+
+        <!-- Copyrights
+        ============================================= -->
+        <div id="copyrights">
+
+            <div class="container clearfix">
+
+                <div class="col_half">
+                    {{ _('Copyrights') }} &copy; {{ now().strftime('%Y') }} {{ _('All Rights Reserved.') }}<br>
+                </div>
+
+                <div class="col_half col_last tright">
+                    <div class="clear"></div>
+                    <a href="mailto:{{ config.email }}">
+                    <i class="icon-envelope2"></i> {{ config.email }} <span class="middot">&middot;</span>
+                    </a>
+                    <a href="tel:{{ config.phone_number }}"><i class="icon-phone2"></i> {{ config.phone_number }} <span class="middot">&middot;</span></a>
+                </div>
+
+            </div>
+
+        </div><!-- #copyrights end -->
+
+    </footer><!-- #footer end -->
+
+    </div><!-- #wrapper end -->
+
+    <!-- Go To Top
+    ============================================= -->
+    <div id="gotoTop" class="icon-angle-up"></div>
+{% endblock %}
+
+
+{% block main_js %}
+    <!-- External JavaScripts
+    ============================================= -->
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/plugins.js"></script>
+    <script type="text/javascript" src="/static/toastr/toastr.min.js"></script>
+    <!-- Footer Scripts
+    ============================================= -->
+    <script src="/static/js/functions.min.js"></script>
+{% endblock %}

@@ -1,0 +1,196 @@
+{% extends 'dashboard/layout/content.html' %}
+
+
+
+{% block content %}
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <!-- Post Content
+            ============================================= -->
+            <div class="row clearfix">
+
+                <div class="col">
+
+                <form action="" method="post">
+                    {{ form.csrf_token }}
+                    <div id="" class="form-group">
+                        {{ form.site_name.label }}
+                        <div class="">
+                            {{ form.site_name(class='form-control') }}
+                        </div>
+
+                        {% if form.site_name.errors %}
+                            <ul class="errors">{% for error in form.site_name.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.company_name.label }}
+                        <div class="">
+                            {{ form.company_name(class='form-control') }}
+                        </div>
+
+                        {% if form.company_name.errors %}
+                            <ul class="errors">{% for error in form.company_name.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.seo_description.label }}
+                        <div class="">
+                            {{ form.seo_description(class='form-control') }}
+                        </div>
+
+                        {% if form.seo_description.errors %}
+                            <ul class="errors">{% for error in form.seo_description.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.email.label }}
+                        <div class="">
+                            {{ form.email(class='form-control') }}
+                        </div>
+
+                        {% if form.email.errors %}
+                            <ul class="errors">{% for error in form.email.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.phone_number.label }}
+                        <div class="">
+                            {{ form.phone_number(class='form-control') }}
+                        </div>
+
+                        {% if form.phone_number.errors %}
+                            <ul class="errors">{% for error in form.phone_number.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.address.label }}
+                        <div class="">
+                            {{ form.address(class='form-control') }}
+                        </div>
+
+                        {% if form.address.errors %}
+                            <ul class="errors">{% for error in form.address.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.location.label }}
+                        <div class="">
+                            {{ form.location(class='form-control') }}
+                        </div>
+
+                        {% if form.location.errors %}
+                            <ul class="errors">{% for error in form.location.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.counter_line_value_1.label }}
+                        <div class="">
+                            {{ form.counter_line_value_1(class='form-control') }}
+                        </div>
+
+                        {% if form.counter_line_value_1.errors %}
+                            <ul class="errors">{% for error in form.counter_line_value_1.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.counter_line_name_1.label }}
+                        <div class="">
+                            {{ form.counter_line_name_1(class='form-control') }}
+                        </div>
+
+                        {% if form.counter_line_name_1.errors %}
+                            <ul class="errors">{% for error in form.counter_line_name_1.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.counter_line_value_2.label }}
+                        <div class="">
+                            {{ form.counter_line_value_2(class='form-control') }}
+                        </div>
+
+                        {% if form.counter_line_value_2.errors %}
+                            <ul class="errors">{% for error in form.counter_line_value_2.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.counter_line_name_2.label }}
+                        <div class="">
+                            {{ form.counter_line_name_2(class='form-control') }}
+                        </div>
+
+                        {% if form.counter_line_name_2.errors %}
+                            <ul class="errors">{% for error in form.counter_line_name_2.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.counter_line_value_3.label }}
+                        <div class="">
+                            {{ form.counter_line_value_3(class='form-control') }}
+                        </div>
+
+                        {% if form.counter_line_value_3.errors %}
+                            <ul class="errors">{% for error in form.counter_line_value_3.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.counter_line_name_3.label }}
+                        <div class="">
+                            {{ form.counter_line_name_3(class='form-control') }}
+                        </div>
+
+                        {% if form.counter_line_name_3.errors %}
+                            <ul class="errors">{% for error in form.counter_line_name_3.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.counter_line_value_4.label }}
+                        <div class="">
+                            {{ form.counter_line_value_4(class='form-control') }}
+                        </div>
+
+                        {% if form.counter_line_value_4.errors %}
+                            <ul class="errors">{% for error in form.counter_line_value_4.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+                    <div id="" class="form-group">
+                        {{ form.counter_line_name_4.label }}
+                        <div class="">
+                            {{ form.counter_line_name_4(class='form-control') }}
+                        </div>
+
+                        {% if form.counter_line_name_4.errors %}
+                            <ul class="errors">{% for error in form.counter_line_name_4.errors %}
+                                <li>{{ error }}</li>{% endfor %}</ul>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group">
+                        <div class=""><input type="submit" name="submit" value="{{ gettext('Submit') }}"
+                                             class="btn btn-primary"
+                                             id="submit-id-submit"></div>
+                    </div>
+                </form>
+                </div>
+
+            </div><!-- .postcontent end -->
+        </div>
+    </div>
+{% endblock %}
