@@ -3,24 +3,25 @@
 
 {% block content %}
 
-    <div class="content-wrap">
+    <section class="section">
+        <div class="row">
+            <div class="col">
 
-        <div class="container clearfix">
+                <div class="card overflow-visible">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ title }}</h5>
 
-            <!-- Post Content
-            ============================================= -->
-            <div class="row clearfix">
-
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>{{ _('Id') }}</th>
-                        <th>{{ _('Title') }}</th>
-                        <th>{{ _('Email') }}</th>
-                        <th>{{ _('Created at') }}</th>
-                        <th>{{ _('Actions') }}</th>
-                    </tr>
-                    </thead>
+                        <!-- Default Table -->
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{ _('Id') }}</th>
+                                <th>{{ _('Title') }}</th>
+                                <th>{{ _('Email') }}</th>
+                                <th>{{ _('Created at') }}</th>
+                                <th>{{ _('Actions') }}</th>
+                            </tr>
+                            </thead>
                     <tbody>
                     {% for object in object_list %}
 
@@ -32,31 +33,35 @@
                             <td>{{ object.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
 
                             <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{ _("Actions") }}
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item"
+
+                                        <!-- Example single danger button -->
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ _("Actions") }}
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item"
                                            href="{{ url_for('message-detail-page', obj_id=object.id) }}">{{ _('View') }}</a>
-                                    </div>
-                                </div>
+                                                </li>
+
+                                            </ul>
+                                        </div>
                             </td>
                         </tr>
                     {% endfor %}
 
                     </tbody>
-                </table>
-
-
-            </div><!-- .postcontent end -->
-
-            <div class="row">
-                <div class="col">
-                    {% include 'partials/pagination.html' %}
+                        </table>
+                        <!-- End Default Table Example -->
+                    </div>
+                    <div class="card-footer">
+                        {% include 'partials/pagination.html' %}
+                    </div>
                 </div>
             </div>
+
         </div>
-    </div>
+    </section>
 {% endblock %}

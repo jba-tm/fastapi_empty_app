@@ -12,40 +12,48 @@
             ============================================= -->
             <div class="row clearfix">
 
-                <form action="" method="post">
 
-                    {{ form.csrf_token }}
-                    <div id="" class="form-group">
-                        {{ form.email.label }}
-                        <div class="">
-                            {{ form.email(class='form-control') }}
-                        </div>
+                <div class="card">
 
-                        {% if form.email.errors %}
-                            <ul class="errors">{% for error in form.email.errors %}
-                                <li>{{ error }}</li>{% endfor %}</ul>
-                        {% endif %}
+                    <div class="card-header">
+                        <h5 class="card-title">{{ title }}</h5>
                     </div>
-                    <div id="" class="form-group">
-                        {{ form.password.label }}
-                        <div class="">
-                            {{ form.password(class='form-control') }}
-                        </div>
+                    <div class="card-body">
 
-                        {% if form.password.errors %}
-                            <ul class="errors">{% for error in form.password.errors %}
-                                <li>{{ error }}</li>{% endfor %}</ul>
-                        {% endif %}
+                        <form action="" method="post">
+
+                            {{ form.csrf_token }}
+                            <div id="" class="form-group">
+                                {{ form.email.label }}
+                                <div class="">
+                                    {{ form.email(class='form-control') }}
+                                </div>
+
+                                {% if form.email.errors %}
+                                    <ul class="errors">{% for error in form.email.errors %}
+                                        <li>{{ error }}</li>{% endfor %}</ul>
+                                {% endif %}
+                            </div>
+                            <div id="" class="form-group">
+                                {{ form.password.label }}
+                                <div class="">
+                                    {{ form.password(class='form-control') }}
+                                </div>
+
+                                {% if form.password.errors %}
+                                    <ul class="errors">{% for error in form.password.errors %}
+                                        <li>{{ error }}</li>{% endfor %}</ul>
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <div class=""><input type="submit" name="submit" value="{{ gettext('Submit') }}"
+                                                     class="btn btn-primary"
+                                                     id="submit-id-submit"></div>
+                            </div>
+                        </form>
                     </div>
-
-                    <div class="form-group">
-                        <div class=""><input type="submit" name="submit" value="{{ gettext('Submit') }}"
-                                             class="btn btn-primary"
-                                             id="submit-id-submit"></div>
-                    </div>
-                </form>
-
-
+                </div>
             </div><!-- .postcontent end -->
         </div>
     </div>

@@ -11,38 +11,43 @@
             <!-- Post Content
             ============================================= -->
             <div class="row clearfix">
-                <table class="table">
-                    <tbody>
-                    <tr>
-                        <td>{{ _('Fullname') }}</td>
-                        <td>{{ object.fullname }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ _('Company name') }}</td>
-                        <td>{{ object.company_name }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ _('Email') }}</td>
-                        <td>{{ object.email }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ _('Phone number') }}</td>
-                        <td>{{ object.phone_number }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ _('Title') }}</td>
-                        <td>{{ object.title }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ _('Body') }}</td>
-                        <td>{{ object.body }}</td>
-                    </tr>
-                    <tr>
-                        <td>{{ _('Created at') }}</td>
-                        <td>{{ object.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="card">
+                    <div class="card-body">
+
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>{{ _('Fullname') }}</td>
+                                <td>{{ object.fullname }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ _('Company name') }}</td>
+                                <td>{{ object.company_name }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ _('Email') }}</td>
+                                <td>{{ object.email }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ _('Phone number') }}</td>
+                                <td>{{ object.phone_number }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ _('Title') }}</td>
+                                <td>{{ object.title }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ _('Body') }}</td>
+                                <td>{{ object.body }}</td>
+                            </tr>
+                            <tr>
+                                <td>{{ _('Created at') }}</td>
+                                <td>{{ object.created_at.strftime('%d.%m.%Y %H:%M') }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
             </div><!-- .postcontent end -->
         </div>

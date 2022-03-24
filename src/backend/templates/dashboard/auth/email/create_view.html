@@ -12,6 +12,14 @@
             ============================================= -->
             <div class="row clearfix">
 
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h5 class="card-title">{{ title }}</h5>
+                    </div>
+                    <div class="card-body">
+
                 <form action="" method="post">
 
                     {{ form.csrf_token }}
@@ -26,6 +34,8 @@
                                 <li>{{ error }}</li>{% endfor %}</ul>
                         {% endif %}
                     </div>
+                <div class="form-group">
+
                     <div class="form-check">
                         {{ form.is_active(class='form-check-input') }}
                         <label class="form-check-label"
@@ -36,6 +46,7 @@
                                 <li>{{ error }}</li>{% endfor %}</ul>
                         {% endif %}
                     </div>
+                </div>
 
                     <div class="form-group mt-3">
                         <div class=""><input type="submit" name="submit" value="{{ gettext('Submit') }}"
@@ -43,6 +54,8 @@
                                              id="submit-id-submit"></div>
                     </div>
                 </form>
+                    </div>
+                </div>
 
 
             </div><!-- .postcontent end -->

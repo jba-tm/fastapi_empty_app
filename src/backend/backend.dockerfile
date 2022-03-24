@@ -1,6 +1,6 @@
 # Dockerfile
 # pull official base image
-FROM python:3.9.9
+FROM python:3.9.11
 # accept arguments
 ARG PIP_REQUIREMENTS=production.txt
 ARG USER

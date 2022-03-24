@@ -52,10 +52,6 @@ def get_application() -> FastAPI:
         return RedirectResponse(settings.LOGIN_URL, status_code=HTTP_303_SEE_OTHER)
 
     application.add_route(
-        path='/admin', route=RedirectResponse('/admin/user/')
-    )
-
-    application.add_route(
         path='/sitemap.xml', route=sitemap,
     )
     return application

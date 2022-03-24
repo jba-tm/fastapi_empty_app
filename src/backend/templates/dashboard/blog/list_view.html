@@ -1,0 +1,76 @@
+{% extends 'dashboard/layout/content.html' %}
+
+
+{% block content %}
+
+    <section class="section">
+    <div class="container">
+
+        <div class="row">
+            <div class="col">
+
+                <div class="card overflow-visible">
+                    <div class="card-header">
+
+                        <a href="{{ url_for('post-create-page') }}" class="btn btn-primary btn-sm"><i
+                                class="icon-plus"></i>{{ _('Add') }}</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ title }}</h5>
+
+                        <!-- Default Table -->
+                        <table class="table table-striped">
+
+                            <thead>
+                            <tr>
+                                <th>{{ _('Title') }}</th>
+                                <th>{{ _('Actions') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for object in object_list %}
+
+                                <tr>
+                                    <td>{{ object.title }}</td>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ _("Actions") }}
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                       href="{{ url_for('post-detail-page', slug_in=object.slug) }}">{{ _('View') }}</a>
+                                                </li>
+                                                <li>
+
+                                                    <a class="dropdown-item"
+                                                       href="{{ url_for('post-update-page', slug_in=object.slug) }}">{{ _('Edit') }}</a>
+                                                </li>
+                                                <li>
+                                                    <a class="dropdown-item"
+                                                       href="{{ url_for('post-delete', slug_in=object.slug) }}">{{ _('Delete') }}</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                        <!-- End Default Table Example -->
+                    </div>
+                    <div class="card-footer">
+                        {% include 'partials/pagination.html' %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </section>
+{% endblock %}

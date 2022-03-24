@@ -2,11 +2,14 @@ from typing import Optional, Union
 
 from fastapi import APIRouter, Request, Depends, Form
 from fastapi.responses import RedirectResponse, HTMLResponse
+from slugify import slugify
 from starlette.datastructures import FormData
 from starlette_i18n import gettext_lazy as _
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_302_FOUND
 
+from app.contrib.blog.forms import PostForm
+from app.contrib.blog.repository import post_repo
 from app.contrib.config.repository import config_repo
 from app.contrib.contact_us.repository import message_repo
 from app.contrib.dashboard.forms import ConfigForm, UserForm, UserUpdateForm, EmailForm
@@ -17,6 +20,21 @@ from app.conf.config import settings
 from app.contrib.auth.repository import user_repo, email_repo
 
 router = APIRouter()
+
+
+@router.get('/', response_class=HTMLResponse, name='admin-main-page')
+def get_admin_page(
+        request: Request,
+
+        user: User = Depends(get_authenticated_user),
+) -> HTMLResponse:
+    return templates.TemplateResponse(
+        'dashboard/index.html',
+        {
+            'request': request,
+            'title': _('Dashboard')
+        }
+    )
 
 
 @router.get('/user/', response_class=HTMLResponse, name='user-list-page')
@@ -78,7 +96,7 @@ def create_user(
     if form.validate():
         user = user_repo.create(db=db, obj_in=data)
         flash(request, str(_('User successfully created')), )
-        return RedirectResponse(request.url_for('user-update-page', email_in=user.email), status_code=HTTP_302_FOUND)
+        return RedirectResponse(request.url_for('user-detail-page', email_in=user.email), status_code=HTTP_302_FOUND)
     return templates.TemplateResponse(
         'dashboard/auth/user/create_view.html',
         {
@@ -100,7 +118,7 @@ def get_single_user(
     user_in = user_repo.get_by_email(db, email=email_in)
     if not user_in:
         flash(request, str(_("User does not exist")), 'warning')
-        return RedirectResponse(request.url_for('user-detail-page', email_in=user_in.email), status_code=HTTP_302_FOUND)
+        return RedirectResponse(request.url_for('user-list-page', ), status_code=HTTP_302_FOUND)
 
     return templates.TemplateResponse(
         'dashboard/auth/user/detail_view.html',
@@ -292,7 +310,7 @@ def update_email_page(
     obj = email_repo.get_by_params(db=db, params={'email': email_in})
     if not obj:
         flash(request, str(_("Email does not exist")), 'warning')
-        return RedirectResponse(request.url_for('email-detail-page', email_in=obj.email), status_code=HTTP_302_FOUND)
+        return RedirectResponse(request.url_for('email-list-page', email_in=obj.email), status_code=HTTP_302_FOUND)
     form = EmailForm(obj=obj)
 
     return templates.TemplateResponse(
@@ -327,7 +345,7 @@ def update_email(
     if form.validate():
         obj = email_repo.update(db=db, db_obj=obj, obj_in=data)
         flash(request, str(_('Email successfully updated')))
-        return RedirectResponse(request.url_for('email-update-page', email_in=obj.email), status_code=HTTP_302_FOUND)
+        return RedirectResponse(request.url_for('email-detail-page', email_in=obj.email), status_code=HTTP_302_FOUND)
 
     return templates.TemplateResponse(
         'dashboard/auth/email/update_view.html',
@@ -459,14 +477,6 @@ def update_config(
         location: Optional[str] = Form(None),
         company_name: Optional[str] = Form(None),
         phone_number: Optional[str] = Form(None),
-        counter_line_value_1: Optional[str] = Form(None),
-        counter_line_name_1: Optional[str] = Form(None),
-        counter_line_value_2: Optional[str] = Form(None),
-        counter_line_name_2: Optional[str] = Form(None),
-        counter_line_value_3: Optional[str] = Form(None),
-        counter_line_name_3: Optional[str] = Form(None),
-        counter_line_value_4: Optional[str] = Form(None),
-        counter_line_name_4: Optional[str] = Form(None),
         user: User = Depends(get_authenticated_user),
         db: Session = Depends(get_db),
 ) -> Union[HTMLResponse, RedirectResponse]:
@@ -482,14 +492,6 @@ def update_config(
         'company_name': company_name,
         'address': address,
         'location': location,
-        'counter_line_value_1': counter_line_value_1,
-        'counter_line_name_1': counter_line_name_1,
-        'counter_line_value_2': counter_line_value_2,
-        'counter_line_name_2': counter_line_name_2,
-        'counter_line_value_3': counter_line_value_3,
-        'counter_line_name_3': counter_line_name_3,
-        'counter_line_value_4': counter_line_value_4,
-        'counter_line_name_4': counter_line_name_4,
     }
 
     form_data = FormData(**data)
@@ -509,3 +511,175 @@ def update_config(
             'title': _('Update site configuration')
         }
     )
+
+
+@router.get('/post/', response_class=HTMLResponse, name='post-list-page')
+def post_list_page(
+
+        request: Request,
+        user: User = Depends(get_authenticated_user),
+        db: Session = Depends(get_db),
+        commons: dict = Depends(get_commons)
+
+) -> HTMLResponse:
+    limit = commons.get('limit', settings.PAGINATION_MAX_SIZE)
+    offset = commons.get('offset', 0)
+    q = commons.get('q')
+
+    object_list = post_repo.get_all(db=db, q=q, limit=limit, offset=offset)
+    total = post_repo.count(db, q=q)
+    return templates.TemplateResponse(
+        'dashboard/blog/list_view.html',
+        {
+            'request': request,
+            'title': _('Posts'),
+            'limit': limit,
+            'page': commons.get('page', 1),
+            'total': total,
+            'object_list': object_list,
+        }
+    )
+
+
+@router.get('/post/create/', response_class=HTMLResponse, name='post-create-page')
+def post_create_page(
+        request: Request,
+        user: User = Depends(get_authenticated_user),
+) -> HTMLResponse:
+    form = PostForm()
+    return templates.TemplateResponse(
+        'dashboard/blog/create_view.html',
+        {
+            'request': request,
+            'form': form,
+            'title': _('Create post')
+        }
+    )
+
+
+@router.post('/post/create/', response_class=RedirectResponse, name='post-create')
+def create_user(
+        request: Request,
+        slug: str = Form(...),
+        title: str = Form(...),
+        content: str = Form(...),
+
+        user: User = Depends(get_authenticated_user),
+        db: Session = Depends(get_db),
+) -> Union[HTMLResponse, RedirectResponse]:
+    data = {
+        'slug': slugify(slug),
+        'title': title,
+        'content': content,
+    }
+    form = PostForm(data=data)
+    if form.validate():
+        post = post_repo.create(db=db, obj_in=data)
+        flash(request, str(_('Post successfully created')), )
+        return RedirectResponse(request.url_for('post-detail-page', slug_in=post.slug), status_code=HTTP_302_FOUND)
+    return templates.TemplateResponse(
+        'dashboard/blog/create_view.html',
+        {
+            'request': request,
+            'form': form,
+            'title': _('Create post')
+        }
+    )
+
+
+@router.get('/post/{slug_in}/detail/', response_class=HTMLResponse, name='post-detail-page')
+def get_post_page(
+
+        request: Request,
+        slug_in: str,
+        user: User = Depends(get_authenticated_user),
+        db: Session = Depends(get_db),
+) -> Union[RedirectResponse, HTMLResponse]:
+    post = post_repo.get_by_params(db, params={'slug': slug_in})
+    if not post:
+        flash(request, str(_("Post does not exist")), 'warning')
+        return RedirectResponse(request.url_for('post-list-page', ), status_code=HTTP_302_FOUND)
+    return templates.TemplateResponse(
+        'dashboard/blog/detail_view.html',
+        {
+            'request': request,
+            'object': post,
+            'title': _("Post: %(model)s") % {'model': post.title}
+        }
+    )
+
+
+@router.get('/post/{slug_in}/update/', response_class=HTMLResponse, name='post-update-page')
+def post_update_page(
+        request: Request,
+        slug_in: str,
+        user: User = Depends(get_authenticated_user),
+        db: Session = Depends(get_db),
+) -> Union[HTMLResponse, RedirectResponse]:
+    post_in = post_repo.get_by_params(db, params={'slug': slug_in})
+    if not post_in:
+        flash(request, str(_("Post does not exist")), 'warning')
+        return RedirectResponse(request.url_for('post-list-page', ), status_code=HTTP_302_FOUND)
+    form = PostForm(obj=post_in)
+    return templates.TemplateResponse(
+        'dashboard/blog/update_view.html',
+        {
+            'request': request,
+            'form': form,
+            'title': _('Edit post: %(model)s') % {'model': post_in.slug}
+        }
+    )
+
+
+@router.post('/post/{slug_in}/update/', response_class=RedirectResponse, name='post-update')
+def update_post(
+        request: Request,
+        slug_in: str,
+        slug: str = Form(...),
+        title: str = Form(...),
+        content: str = Form(...),
+        user: User = Depends(get_authenticated_user),
+        db: Session = Depends(get_db),
+) -> Union[RedirectResponse, HTMLResponse]:
+    post_in = post_repo.get_by_params(db, params={'slug': slug_in})
+    if not post_in:
+        flash(request, str(_("Post does not exist")), 'warning')
+        return RedirectResponse(request.url_for('post-list-page', ), status_code=HTTP_302_FOUND)
+    data = {
+        'slug': slugify(slug),
+        'title': title,
+        'content': content,
+    }
+    form_data = FormData(**data)
+    form = PostForm(obj=post_in, formdata=form_data)
+    if form.validate():
+        user_repo.update(db=db, db_obj=post_in, obj_in=data)
+        flash(request, str(_('User successfully updated')))
+        return RedirectResponse(request.url_for('post-detail-page', slug_in=post_in.slug), status_code=HTTP_302_FOUND)
+
+    return templates.TemplateResponse(
+        'dashboard/post/update_view.html',
+        {
+            'request': request,
+            'form': form,
+            'title': _('Edit post: %(model)s') % {'model': post.title}
+        }
+    )
+
+
+@router.get('/post/{slug_in}/delete/', response_class=RedirectResponse, name='post-delete')
+def delete_post(
+        request: Request,
+        slug_in: str,
+        user: User = Depends(get_authenticated_user),
+        db: Session = Depends(get_db),
+) -> RedirectResponse:
+    post_in = post_repo.get_by_params(db, params={'slug': slug_in})
+    response = RedirectResponse(request.url_for('post-list-page', ), status_code=HTTP_302_FOUND)
+    if not post_in:
+        flash(request, str(_("Post does not exist")), 'warning')
+        return response
+    else:
+        flash(request, str(_('Post successfully deleted')))
+        post_repo.delete(db, db_obj=post_in)
+    return response

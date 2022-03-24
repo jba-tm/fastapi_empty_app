@@ -4,15 +4,20 @@
 
 {% block content %}
 
-    <div class="content-wrap">
+    <section class="section">
 
         <div class="container clearfix">
 
             <!-- Post Content
             ============================================= -->
             <div class="row clearfix">
-                            <a href="{{ url_for('email-update-page', email_in=object.email) }}" class="button button-large button-circle button-green"><i class="icon-edit"></i>{{ _('Edit') }}</a>
-                            <a href="{{ url_for('email-delete', email_in=object.email) }}" class="button button-large button-circle button-red"><i class="icon-trash"></i>{{ _('Delete') }}</a>
+              <div class="card">
+                  <div class="card-header">
+                                         <a href="{{ url_for('email-update-page', email_in=object.email) }}" class="btn btn-secondary btn-sm"><i class="icon-edit"></i>{{ _('Edit') }}</a>
+                            <a href="{{ url_for('email-delete', email_in=object.email) }}" class="btn btn-danger btn-sm"><i class="icon-trash"></i>{{ _('Delete') }}</a>
+
+                  </div>
+                    <div class="card-body">
 
                 <table class="table">
                     <tbody>
@@ -26,8 +31,10 @@
                     </tr>
                     </tbody>
                 </table>
+                    </div>
+                </div>
 
             </div><!-- .postcontent end -->
         </div>
-    </div>
+    </section>
 {% endblock %}

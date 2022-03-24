@@ -1,0 +1,31 @@
+{% extends 'dashboard/layout/content.html' %}
+
+
+
+{% block content %}
+
+    <section class="section">
+
+        <div class="container clearfix">
+
+            <!-- Post Content
+            ============================================= -->
+            <div class="row clearfix">
+              <div class="card">
+                  <div class="card-header">
+                                           <a href="{{ url_for('post-update-page', slug_in=object.slug) }}" class="btn btn-secondary btn-sm"><i class="icon-edit"></i>{{ _('Edit') }}</a>
+                            <a href="{{ url_for('post-delete', slug_in=object.slug) }}" class="btn btn-danger btn-sm"><i class="icon-trash"></i>{{ _('Delete') }}</a>
+
+                  </div>
+                    <div class="card-body">
+                        <h1 class="text-center">{{ object.title }}</h1>
+                        <div>
+                            {{ object.content|safe }}
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- .postcontent end -->
+        </div>
+    </section>
+{% endblock %}

@@ -1,811 +1,125 @@
 {% extends 'frontend/layout/content.html' %}
 
 
-{% block header_section %}
-    <!-- Header
-    ============================================= -->
-    <header id="header">
-
-        <div id="header-wrap">
-
-            <div class="clearfix">
-
-                <div id="primary-menu-trigger"><i class="icon-reorder"></i></div>
-
-                <!-- Logo
-                ============================================= -->
-                {#                <div id="logo">#}
-                {#                    <a href="/" class="standard-logo" data-dark-logo="/static/image0.jpeg"><img#}
-                {#                            style="{width: 125px; height: 100px;}"#}
-                {#                            src="/static/image0.jpeg" alt=""></a>#}
-                {#                    <a href="/" class="retina-logo" data-dark-logo="/static/image2.jpeg"><img#}
-                {#                            src="/static/image2.jpeg" alt=""></a>#}
-                {#                </div><!-- #logo end -->#}
-
-                <!-- Primary Navigation
-                ============================================= -->
-                <nav id="primary-menu" class="sub-title">
-
-                    <ul class="one-page-menu">
-                        <li class="current"><a href="#" data-href="#slider">
-                            <div>Начало</div>
-                            <span>Знакомство</span></a></li>
-                        <li><a href="#" data-href="#id_about_us">
-                            <div>О нас</div>
-                            <span>О компании</span></a></li>
-                        <li><a href="#" data-href="#id_our_services">
-                            <div>Наши услуги</div>
-                            <span>Сервисы</span></a></li>
-                        <li><a href="#" data-href="#id_interesting">
-                            <div>Интересно</div>
-                            <span>Полезная информация</span></a></li>
-                        <li><a href="#" data-href="#id_delivery">
-                            <div>Перевозки</div>
-                            <span>Виды перевозок</span></a></li>
-                        <li><a href="#" data-href="#id_docs">
-                            <div>Документы</div>
-                            <span>Документы для перевозок</span></a></li>
-                        <li><a href="#" data-href="#id_incoterms">
-                            <div>INCOTERMS</div>
-                            <span>Терминалогия</span></a></li>
-                        <li><a href="#" data-href="#id_contact">
-                            <div>Связаться с нами</div>
-                            <span>Напишите нам</span></a></li>
-                    </ul>
-                </nav><!-- #primary-menu end -->
-
-            </div>
-
+{% block content %}
+    <div class="px-4 py-5 my-5 text-center">
+        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/docs/5.0/assets/brand/bootstrap-logo.svg" alt=""
+             width="72" height="57">
+        <h1 class="display-5 fw-bold">{{ _('This is test main page') }}</h1>
+        <div class="col-lg-6 mx-auto">
+            <p class="lead mb-4">
+                {{ _('This is test page for empty Fastapi starter application.') }}
+            </p>
         </div>
+    </div>
+    <section class="section contact mt-5">
 
-    </header>
-    <!-- #header end -->
-{% endblock %}
-{% block extra_section %}
-    <section id="slider" class="slider-element slider-parallax swiper_wrapper full-screen clearfix">
+        <div class="container">
 
-        <div class="slider-parallax-inner" id="">
+            <div class="row gy-4">
 
-            <div class="swiper-container swiper-parent">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide dark"
-                         style="background-image: url('/static/slider/1.webp');">
-                        <div class="container clearfix">
-                            <div class="slider-caption slider-caption-center">
-                                <h1 data-animate="fadeInUp">{{ config.company_name }}</h1>
+                <div class="col-xl-6">
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="info-box card">
+                                <i class="bi bi-geo-alt"></i>
+                                <h3>Address</h3>
+                                <p>{{ config.address }}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="info-box card">
+                                <i class="bi bi-telephone"></i>
+                                <h3>Call Us</h3>
+                                <p>{{ config.phone_number }}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="info-box card">
+                                <i class="bi bi-envelope"></i>
+                                <h3>Email Us</h3>
+                                <p>{{ config.email }}</p>
                             </div>
                         </div>
                     </div>
-                    <div class="swiper-slide"
-                         style="background-image: url('/static/slider/2.webp');">
-                        <div class="container clearfix">
-                            <div class="slider-caption slider-caption-center">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="swiper-slide"
-                         style="background-image: url('/static/slider/3.webp');">
-                        <div class="container clearfix">
-                            <div class="slider-caption slider-caption-center">
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
-                <div class="slider-arrow-left"><i class="icon-angle-left"></i></div>
-                <div class="slider-arrow-right"><i class="icon-angle-right"></i></div>
-                <div class="slide-number">
-                    <div class="slide-number-current"></div>
-                    <span>/</span>
-                    <div class="slide-number-total"></div>
+
+                <div class="col-xl-6">
+                    <div class="card p-4">
+                        <form action="{{ url_for('contact-us') }}" method="post">
+
+                            {{ form.csrf_token }}
+                            <div class="row gy-4">
+
+                                <div class="col-md-6">
+
+                                {{ form.fullname(class='form-control', placeholder=_('Fullname')) }}
+
+
+                                    {% if form.fullname.errors %}
+                                        <ul class="errors">{% for error in form.fullname.errors %}
+                                            <li>{{ error }}</li>{% endfor %}</ul>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 ">
+                                {{ form.company_name(class='form-control', placeholder=_('Company name')) }}
+                                    {% if form.company_name.errors %}
+                                        <ul class="errors">{% for error in form.company_name.errors %}
+                                            <li>{{ error }}</li>{% endfor %}</ul>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 ">
+
+                                {{ form.email(class='form-control', placeholder=_('Email')) }}
+                                    {% if form.email.errors %}
+                                        <ul class="errors">{% for error in form.email.errors %}
+                                            <li>{{ error }}</li>{% endfor %}</ul>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6 ">
+
+                                {{ form.phone_number(class='form-control', placeholder=_('Phone number')) }}
+                                    {% if form.phone_number.errors %}
+                                        <ul class="errors">{% for error in form.phone_number.errors %}
+                                            <li>{{ error }}</li>{% endfor %}</ul>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-12">
+
+
+                                {{ form.title(class='form-control', placeholder=_('Subject')) }}
+                                    {% if form.title.errors %}
+                                        <ul class="errors">{% for error in form.title.errors %}
+                                            <li>{{ error }}</li>{% endfor %}</ul>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-12">
+
+                                {{ form.body(class='form-control', placeholder=_('Message'), rows=6) }}
+                                    {% if form.body.errors %}
+                                        <ul class="errors">{% for error in form.body.errors %}
+                                            <li>{{ error }}</li>{% endfor %}</ul>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-12 text-center">
+
+                                    <button class="btn btn-primary" type="submit">{{ _('Send Message') }}</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+
                 </div>
+
             </div>
-
         </div>
 
     </section>
-
-{% endblock %}
-
-{% block content %}
-    <div class="content-wrap">
-        <div class="promo promo-light promo-full bottommargin-lg header-stick notopborder">
-            <div class="container clearfix">
-                <h3>Мы предоставляем транспортные и экспедиторские услуги для перевозки
-                    товаров из Грузии по всему миру</h3>
-            </div>
-        </div>
-        <div class="container mt-1" id="id_about_us">
-            <div class="row">
-                <div id="col-lg-12">
-                    <div class="heading-block">
-                        <h3>О компании</h3>
-                    </div>
-{#                    <img src="/static/image0.jpeg" alt="Image" class="alignleft"#}
-{#                         style="max-width: 320px;">#}
-                    <p>Транспортно-логистическая компания “MESGEN TRADING and LOGISTICS” LLC является одним из ведущих
-                        предприятий Грузии, осуществляющих международные транспортные перевозки.</p>
-                    <p>Компания предлагает современные и оптимальные логистические решения, высокий уровень сервиса и
-                        комплекс качественных услуг по всем видам перевозок, хранения грузов и экспортно-импортных
-                        операций. В работу постоянно внедряются новейшие технологии, одновременно эффективно
-                        используются имеющиеся ресурсы и внутренний потенциал.</p>
-                    <p>Обеспечивая комплексный подход к грузоперевозкам на уровне мировых стандартов, мы стараемся быть
-                        первым выбором клиента в любых вопросах транспортной логистики.</p>
-                    <p>Мы искренне верим в то, что своим отношением к делу, трудолюбием создаём платформу
-                        транспортно-логистической сферы – такой сложной и требующей постоянного совершенствования
-                        процессов отрасли.</p>
-                </div>
-            </div>
-        </div>
-
-
-        <div id="id_our_services" class="container clearfix">
-
-            <div class="heading-block center nobottomborder bottommargin-lg">
-                <h2>Наши услуги</h2>
-                <p class="text-justify">
-                    “MESGEN TRADING and LOGISTICS” LLC работает с различными логистическими задачами, обеспечивая
-                    оперативную и надежную перевозку грузов. В частности, компания осуществляет доставку грузов и
-                    посылок из/в страны СНГ, Европы, Турцию, а также, Китай, Индию, Южную Корею, Филиппины, Шри-Ланку,
-                    США, выполняет автомобильные и железнодорожные перевозки, авиаперевозки, контейнерные перевозки.
-                </p>
-                <p class="text-justify">
-                    Компания разрабатывает индивидуальные логистические решения практически для всех типов грузов, в том
-                    числе крупногабаритных грузов и грузов, требующих особых условий перевозки. Это могут быть, продукты
-                    питания, требующие соблюдения особого температурного режима, и продукция химической промышленности,
-                    предусматривающая перевозку в специальных емкостях.
-                </p>
-                <p class="text-justify">
-                    Мы предоставляем своим клиентам не только услуги в сфере транспортировки груза, но также
-                    осуществляем сбор и оформление всех необходимых документов, выгрузку и разгрузку груза, по желанию
-                    организуем страхование и защиту груза.
-                </p>
-                <p class="text-justify">
-                    Высококвалифицированный персонал с многолетним опытом работы разработает экономически выгодный и
-                    оптимальный по времени маршрут, гарантируя сохранность и полную безопасность грузов во время
-                    следования. Каждому заказчику предоставляется персональный менеджер, с которым он может решить любые
-                    вопросы от заказа перевозки до выставления счета.
-                </p>
-                <p class="text-justify">
-                    Для этого у компании есть автопарк транспортных средств. В случае большого количества заявок от
-                    клиента, мы привлекаем для выполнения заказа только проверенных перевозчиков. Водители-экспедиторы
-                    нашего предприятия имеют высокий опыт работы в транспортно-экспедиционной среде.
-                </p>
-            </div>
-
-
-            <div class="nobottommargin">
-                <div class="heading-block fancy-title nobottomborder title-bottom-border">
-                    <h4>Автоперевозки</h4>
-                </div>
-
-                <p>
-                    “MESGEN TRADING and LOGISTICS” LLC предоставляет полный комплекс услуг по организации грузоперевозок
-                    автомобильным транспортом. У нас есть развитая партнерская сеть в странах Европы, Азии, СНГ, Турции
-                    и др. Количество транспорта регулярно увеличивается в соответствии с возрастающим объемом перевозок.
-                    Это позволяет выполнять различные типы запросов от клиента, предоставлять услуги своевременно и
-                    качественно, независимо от объемов и направлений автомобильных перевозок грузов.
-                </p>
-                <p>
-                    Автомобильные перевозки занимают большую часть международных транспортных операций и пользуются
-                    широким спросом среди юридических и физических лиц. Их эффективность во многих случаях даёт
-                    значительную экономию на дополнительных операциях по разгрузке и погрузке. Это универсальный вид
-                    транспортировки грузов, при котором можно составить оптимальный логистический маршрут, за счет чего
-                    повысить эффективность и оперативно доставить по любому адресу необходимый груз.</p>
-            </div>
-
-            <div class="nobottommargin">
-
-                <div class="heading-block fancy-title nobottomborder title-bottom-border">
-                    <h4>Морские перевозки </h4>
-                </div>
-                <p>
-                    Международные морские грузоперевозки от компании “MESGEN TRADING and LOGISTICS” LLC – это выгодный и
-                    популярный способ перевозки грузов. Они отвечают всем требованиям доставки и оптимизированы на
-                    каждом этапе. Мы берем на себя весь процесс подготовки груза к транспортировке, начиная с
-                    документального сопровождения и заканчивая доставкой в нужное место.
-                </p>
-                <p>
-                    Для погрузки, транспортировки и доставки грузов, а также для обработки необходимых документов мы
-                    тщательно отобрали надежных партнеров по всему миру.
-                </p>
-                <p>Выбирая “MESGEN TRADING and LOGISTICS” LLC, вы получаете:</p>
-                <ul>
-                    <li>высокую скорость и своевременность перевозок.</li>
-                    <li>доступные и оптимальные тарифы, что позволяет существенно сократить стоимость транспортных
-                        услуг
-                    </li>
-                    <li>возможность отслеживания груза на любой стадии доставки</li>
-                    <li>сохранность и полную безопасность грузов во время следования</li>
-                    <li>комплексные решения для каждой задачи – надежный аутсорсинг логистических услуг</li>
-                </ul>
-            </div>
-
-            <div class="nobottommargin ">
-
-                <div class="heading-block fancy-title nobottomborder title-bottom-border">
-                    <h4>Авиаперевозки</h4>
-                </div>
-                <p>
-                    Международные авиаперевозки грузов – это самый быстрый и надежный и безопасный способ доставки.
-
-                </p>
-                <p>
-                    Авиадоставка сводит к минимуму все внешние факторы, гарантируя сохранность содержимого и
-                    оперативность выполнения заказа. Логистика перевозок составлена таким образом, чтобы каждый рейс был
-                    максимально выгодным для клиентов.
-                </p>
-
-            </div>
-
-            <div class="nobottommargin ">
-
-                <div class="heading-block fancy-title nobottomborder title-bottom-border">
-                    <h4>Железнодорожные перевозки</h4>
-                </div>
-                <p>Железнодорожные перевозки грузов – это один из самых надёжных и безопасных способов перемещения груза
-                    на большие расстояния. Популярность железнодорожного транспорта состоит в том, что грузы попадают в
-                    место назначения вовремя и без задержек.
-
-                </p>
-                <p>
-
-                    Ему также присуща невысокая себестоимость перевозки, возможность доставки груза на большие
-                    расстояния и регулярность перевозок, хорошая приспособленность для перевозки различных партий грузов
-                    при любых погодных условиях.
-
-                </p>
-
-            </div>
-
-            <div class="clear"></div>
-
-        </div>
-
-
-        <div class="row clearfix align-items-stretch nobottommargin">
-
-            <div class="col-lg-3 col-md-6 dark center col-padding" style="background-color: #515875;">
-                <i class="i-plain i-xlarge divcenter icon-line2-directions"></i>
-                <div class="counter counter-lined"><span data-from="0" data-to="{{ config.counter_line_value_1 }}"
-                                                         data-refresh-interval="50"
-                                                         data-speed="2000"></span>
-                </div>
-                <h5>{{ config.counter_line_name_1 }}</h5>
-            </div>
-
-            <div class="col-lg-3 col-md-6 dark center col-padding" style="background-color: #576F9E;">
-                <i class="i-plain i-xlarge divcenter icon-line2-graph"></i>
-                <div class="counter counter-lined"><span data-from="0" data-to="{{ config.counter_line_value_2 }}"
-                                                         data-refresh-interval="100"
-                                                         data-speed="2500"></span></div>
-                <h5>{{ config.counter_line_name_2 }}</h5>
-            </div>
-
-            <div class="col-lg-3 col-md-6 dark center col-padding" style="background-color: #6697B9;">
-                <i class="i-plain i-xlarge divcenter icon-line2-layers"></i>
-                <div class="counter counter-lined"><span data-from="0" data-to="{{ config.counter_line_value_3 }}"
-                                                         data-refresh-interval="25"
-                                                         data-speed="3500"></span></div>
-                <h5>{{ config.counter_line_name_3 }}</h5>
-            </div>
-
-            <div class="col-lg-3 col-md-6 dark center col-padding" style="background-color: #88C3D8;">
-                <i class="i-plain i-xlarge divcenter icon-line2-clock"></i>
-                <div class="counter counter-lined"><span data-from="0" data-to="{{ config.counter_line_value_4 }}"
-                                                         data-refresh-interval="30"
-                                                         data-speed="2700"></span></div>
-                <h5>{{ config.counter_line_name_4 }}</h5>
-            </div>
-
-        </div>
-
-        <div class="section notopmargin nobottommargin">
-            <div class="container clearfix">
-
-                <div id="id_interesting" class="heading-block center">
-                    <h2>Полезная информация</h2>
-                    <p>
-                        Грузовые контейнеры – это универсальная тара для перемещения и хранения грузов
-                        любых видов. Благодаря многообразию модельного и размерного ряда, контейнеры востребованы
-                        для грузоперевозок автомобильным, воздушным, железнодорожным и водным транспортом.
-                    </p>
-                    <p>В соответствии с рекомендациями ISO, существуют следующие типы контейнеров для перевозки
-                        грузов:</p>
-                </div>
-
-                <div class="clear bottommargin-sm"></div>
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>Стандартный сухой контейнер</h3>
-                        <p>“MESGEN TRADING and LOGISTICS” LLC предоставляет полный
-                            комплекс услуг по организации грузоперевозок автомобильным транспортом.</p>
-                    </div>
-                </div>
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="600">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>Контейнер-платформа</h3>
-                        <p>применяется для транспортировки крупногабаритных и негабаритных объектов. Это обычный вариант
-                            без крыши и боковых панелей. </p>
-                    </div>
-                </div>
-
-                <div class="col_one_third col_last">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="800">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-params"></i></a>
-                        </div>
-                        <h3>Контейнер-цистерна (контейнер-танк)</h3>
-                        <p>эта модификация контейнера предназначена для перевоза жидкостей всех видов: пищевых,
-                            химических, продуктов нефтепереработки, сжиженного газа. </p>
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="200">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>Рефрижераторный контейнер</h3>
-                        <p>предназначен для перемещения грузов, хранение которых требует
-                            соблюдения определенного температурного режима. К таковым относятся замороженные или
-                            охлажденные продукты питания, некоторые химические составы, фармацевтические препараты.
-                        </p>
-                        <p>
-                            Модели рефконтейнеров обозначаются аббревиатурой RE, RS, RT.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="400">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>Контейнер с открытым верхом</h3>
-                        <p>используется при транспортировании груза, который в силу определенных особенностей невозможно
-                            загрузить и выгрузить через боковую стенку. В таких контейнерах съемная крыша может быть
-                            сделана из брезента, гибкого пластика или жесткого материала. </p>
-                    </div>
-                </div>
-
-                <div class="col_one_third col_last">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="1000">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-fire"></i></a>
-                        </div>
-                        <h3>Термоизолированный контейнер</h3>
-                        <p>данный тип грузовых контейнеров применяется при перевозке товаров, которым требуется
-                            поддержание определенной температуры на всем протяжении пути. Конструкцией не предусмотрено
-                            наличие охлаждающего или подогревающего оборудования, температура остается неизменной за
-                            счет герметичности и изотермичности короба.</p>
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-
-                <div class="col_one_third nobottommargin">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="1200">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>Контейнер для насыпных грузов</h3>
-                        <p>эти контейнеры предназначаются для перемещения сыпучих веществ без использования
-                            дополнительной тары. Это может быть зерно, удобрения, цемент, песок и т. д. Они оснащены
-                            дополнительными отверстиями для осуществления погрузки и выгрузки содержимого навалочным
-                            способом. </p>
-                    </div>
-                </div>
-
-                <div class="col_one_third nobottommargin col_last">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="1400">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>Вентилируемый контейнер</h3>
-                        <p>применяются при перевозе объектов, нуждающихся в проветривании и воздухообмене с окружающей
-                            средой. Их особенность - наличие системы естественной или принудительной вентиляции. В
-                            остальном конструкция аналогична обычным сухим и насыпным контейнерам.</p>
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-
-            </div>
-        </div>
-
-        <div id="id_delivery" class="container clearfix mt-3">
-            <div id="section-faqs" class="heading-block title-center page-section">
-                <h2>Виды перевозок</h2>
-                {#                <span>We have answered a wide range of Questions for your Convenience</span>#}
-            </div>
-
-            <div class="col_half nobottommargin">
-
-                <h4 id="faq-1">Унимодальная (одновидовая) перевозка</h4>
-                <p>Унимодальная (одновидовая) перевозка осуществляется одним видом транспорта и применяется, когда
-                    заданы начальный и конечный пункты
-                    транспортировки логистической цепи без промежуточных операций складирования и грузопереработки.</p>
-
-                <div class="line"></div>
-
-                <h4 id="faq-2">Смешанная перевозка</h4>
-                <p>Смешанная перевозка грузов осуществляется обычно двумя видами транспорта. При этом груз доставляется
-                    первым видом
-                    транспорта в так называемый пункт перевалки или грузовой терминал и последующей перегрузкой на
-                    другой вид транспорта. Типичным примером смешанной перевозки является обслуживание автотранспортными
-                    фирмами железнодорожных станций или морского порта транспортного узла.</p>
-
-                <div class="line"></div>
-
-                <h4 id="faq-3">Комбинированная перевозка</h4>
-                <p>Комбинированная перевозка отличается от смешанной использованием более двух видов транспорта.
-                    Использование смешанных (комбинированных) видов транспортировки часто обусловлено структурой
-                    дистрибутивных каналов: отправка крупных партий груза производится с завода – изготовителя на
-                    оптовую базу железнодорожным транспортом (с целью максимального снижения затрат), а развозка с
-                    оптовой базы в пункты розничной торговли – автомобильным. </p>
-
-            </div>
-
-            <div class="col_half nobottommargin col_last">
-
-                <h4 id="faq-7">Интермодальная</h4>
-                <p>Интермодальная перевозка грузов – это перевозка несколькими видами транспорта, когда один из
-                    перевозчиков организует всю доставку от пункта отправления через один и более пунктов перевалки до
-                    пункта назначения и – в зависимости от распределения ответственности за перевозку – выдает различные
-                    виды транспортных документов, а мультимодальной – если лицо, организующее перевозку, несет за нее
-                    ответственность на всем пути следования – независимо от числа участвующих видов транспорта, при этом
-                    оформляется единый перевозочный документ». </p>
-
-                <div class="line"></div>
-
-                <h4 id="faq-8">Мультимодальные перевозки</h4>
-                <p>Мультимодальные перевозки - это «смешанные перевозки, выполняемые транспортными средствами,
-                    принадлежащими одному и тому же
-                    юридическому лицу или находящимися в его оперативном управлении (например, доставка грузов в
-                    аэропорт, воздушная перевозка и доставка грузов из аэропорта, выполняемые транспортными средствами,
-                    принадлежащими одной и той же фирме экспресс – почты).</p>
-            </div>
-        </div>
-
-
-        <div id="id_docs" class="container clearfix">
-
-            <div class="heading-block center nobottomborder bottommargin-lg">
-                <h3>Документы, необходимые для международной перевозки грузов</h3>
-                <p class="text-justify">
-                    <strong>Водительское удостоверение</strong> - Для управления грузовым автомобилем нужны права
-                    категории С (СЕ, если
-                    управление осуществляется грузовиком с прицепом тяжелее 0,75 тонны).
-                </p>
-                <p class="text-justify">
-                    <strong>Техпаспорт</strong> - Полное название – паспорт технического средства (ПТС) Оформляется на
-                    унифицированном бланке строгой отчетности. Первично ПТС оформляет завод-изготовитель. Если машина
-                    произведена за рубежом – таможенный орган, осуществивший «растаможку».
-                </p>
-                <p class="text-justify">
-                    <strong>CMR</strong> - Это аббревиатура транспортной накладной межгосударственного образца.
-                    Оформляется в трех экземплярах (отправителю, получателю и грузоперевозчику). Если груз сборный и у
-                    него несколько получателей, то CMR заполняется для каждого из них.
-                    В накладной зафиксированы сведения о перевозимом товаре, перевозчике, получателе и отправителе.
-                </p>
-                <p class="text-justify">
-                    <strong>TIR</strong> - Это документ с описанием груза (грузовым манифестом) и с отрывными листами.
-                    Их заполняют и отрывают (оставляя корешок) на каждом таможенном пункте по маршруту следования. Бланк
-                    имеет уникальный код (две буквы и семь цифр), а на обложке стоит штамп с указанием срока действия.
-                    Для каждого рейса нужна новая книжка.
-
-                    Грузовой манифест заполняет отправитель. Его необходимо получить перед выездом.
-                </p>
-                <p class="text-justify">
-                    <strong>Разрешение (Дозвол)</strong> - Дозвол удостоверяет, что конкретный автомобиль может
-                    выполнять
-                    грузоперевозки из одного государства в другое. Он оформляется на одну поездку на конкретное ТС.
-                    Существует два основных варианта разрешения:
-                </p>
-
-                <ul class="text-left">
-                    <li>
-                        двухстороннее – получатель находится в одной стране, отправитель – в другой. Транспортировку
-                        может осуществлять либо перевозчик страны-отправителя, либо адресата;
-                    </li>
-                    <li>трехстороннее – грузоперевозчик может быть из третьей страны (не отправителя и не получателя).
-                    </li>
-                </ul>
-            </div>
-
-            <div class="clear"></div>
-
-        </div>
-        <div class="section notopmargin nobottommargin">
-            <div class="container clearfix">
-
-                <div id="id_incoterms" class="heading-block center">
-                    <h2>INCOTERMS</h2>
-                </div>
-
-                <div class="clear bottommargin-sm"></div>
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>FCA (FREE CARRIER)</h3>
-                        <p>Может использоваться независимо от вида транспорта (May be used whatever mode or modes of
-                            transport will be used)
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="600">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>CPT (CARRIAGE PAID TO)</h3>
-                        <p>Продавец должен заключить договор перевозки товара и передать его перевозчику (The Seller
-                            must contract for the carriage of the goods and hand them over to the carrier)</p>
-                    </div>
-                </div>
-
-                <div class="col_one_third col_last">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="800">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>CIF (COST, INSURANCE AND FREIGHT)</h3>
-                        <p>продавец оплачивает доставку товара в порт назначения; риск переходит к Покупателю при
-                            погрузке товара на судно. Он должен обеспечить и оплатить страховку. (The Seller pays to
-                            bring goods to the port of destination; risk is transferred to the Buyer when the goods are
-                            loaded on the vessel. Seller must procure and pay for insurance)</p>
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="200">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>CFR - COST AND FREIGHT</h3>
-                        <p>Продавец оплачивает доставку товара в порт назначения; риск переходит к Покупателю при
-                            погрузке товара на судно. (The Seller pays to bring goods to the port of destination; risk
-                            is transferred to the Buyer when the goods are loaded on the vessel.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="400">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>CIP (CARRIAGE & INSURANCE PAID) </h3>
-                        <p>Продавец заключает договор о страховании от риска потери или повреждения товара во время
-                            перевозки (The seller has the same responsibilities as CPT, but they also contract for
-                            insurance cover against the buyer’s risk of loss of or damage to the goods during the
-                            carriage) </p>
-                    </div>
-                </div>
-
-                <div class="col_one_third col_last">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="1000">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>DAP (DELIVERED AT PLACE)</h3>
-                        <p>Продавец оплачивает транспортировку до терминала, за исключением расходов, связанных с
-                            таможенной очисткой, и принимает на себя все риски до момента выгрузки товара на терминале.
-                            (The Seller pays for carriage to the terminal, except costs related to import clearance, and
-                            assumes all risks up to the point that goods are unloaded at the terminal)</p>
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-
-                <div class="col_one_third nobottommargin">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="1200">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>DAT – DELIVERED AT TERMINAL</h3>
-                        <p>эти контейнеры предназначаются для перемещения сыпучих веществ без использования
-                            дополнительной тары. Это может быть зерно, удобрения, цемент, песок и т. д. Они оснащены
-                            дополнительными отверстиями для осуществления погрузки и выгрузки содержимого навалочным
-                            способом. </p>
-                    </div>
-                </div>
-                <div class="col_one_third nobottommargin">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="1200">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>FOB - FREE ON BOARD</h3>
-                        <p>Продавец обязан погрузить товары, прошедшие таможенную очистку для экспорта, на судно,
-                            указанное Покупателем. Стоимость и риск делятся между Покупателем и Продавцом, пока товары
-                            фактически находятся на борту судна. (The Seller must load goods, cleared for export, on the
-                            vessel named by the Buyer. Cost and risk are divided between Buyer and Seller while goods
-                            are actually onboard the vessel)
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col_one_third nobottommargin col_last">
-                    <div class="feature-box fbox-small fbox-plain" data-animate="fadeIn" data-delay="1400">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-note"></i></a>
-                        </div>
-                        <h3>FAS (FREE ALONGSIDE SHIP)</h3>
-                        <p>Продавец осуществляет доставку, когда товар размещается рядом с судном (например, на причале
-                            или барже), указанном покупателем, в названном порту отгрузки (The Seller delivers when the
-                            goods are placed alongside the vessel (e.g., on a quay or a barge) nominated by the buyer at
-                            the named port of shipment)
-                        </p>
-                    </div>
-                </div>
-
-                <div class="clear"></div>
-
-            </div>
-        </div>
-
-        <div id="" class="container clearfix">
-
-
-            <div class="clear"></div>
-
-            <div class="divider divider-short divider-center"><i class="icon-circle"></i></div>
-
-            <div id="section-contact" class="heading-block title-center page-section">
-                <h2>Напишите нам прямо сейчась</h2>
-                <span>Есть вопросы? Задайте нам через эту форму</span>
-            </div>
-
-            <!-- Contact Form
-            ============================================= -->
-            <div class="col_full" id="id_contact">
-
-                <div class="fancy-title title-dotted-border">
-                    <h3>Написать письмо</h3>
-                </div>
-                <div class="">
-                    <form class="nobottommargin" id="template-contactform" name="template-contactform"
-                          action="#id_contact" method="post">
-                        {{ form.csrf_token }}
-
-                        {% if form.csrf_token.errors %}
-                            <div class="warning">{{ _('You have submitted an invalid CSRF token') }}</div>
-                        {% endif %}
-                        <div class="form-process"></div>
-
-                        <div class="col_one_third">
-                            {{ form.fullname.label }}
-                            {{ form.fullname(class='sm-form-control required') }}
-                            {% if form.fullname.errors %}
-                                <ul class="errors">{% for error in form.fullname.errors %}
-                                    <li>{{ error }}</li>{% endfor %}</ul>
-                            {% endif %}
-                        </div>
-
-                        <div class=" col_one_third">
-
-                            {{ form.email.label }}
-                            {{ form.email(class='required email sm-form-control') }}
-                            {% if form.email.errors %}
-                                <ul class="errors">{% for error in form.email.errors %}
-                                    <li>{{ error }}</li>{% endfor %}</ul>
-                            {% endif %}
-
-                        </div>
-
-                        <div class="col_one_third col_last">
-
-                            {{ form.phone_number.label }}
-                            {{ form.phone_number(class='sm-form-control') }}
-                            {% if form.phone_number.errors %}
-                                <ul class="errors">{% for error in form.phone_number.errors %}
-                                    <li>{{ error }}</li>{% endfor %}</ul>
-                            {% endif %}
-
-                        </div>
-
-                        <div class="clear"></div>
-
-                        <div class="col_full">
-
-                            {{ form.company_name.label }}
-                            {{ form.company_name(class='sm-form-control') }}
-                            {% if form.company_name.errors %}
-                                <ul class="errors">{% for error in form.company_name.errors %}
-                                    <li>{{ error }}</li>{% endfor %}</ul>
-                            {% endif %}
-
-                        </div>
-
-                        <div class="clear"></div>
-                        <div class="col_full">
-
-                            {{ form.title.label }}
-                            {{ form.title(class='required sm-form-control') }}
-                            {% if form.title.errors %}
-                                <ul class="errors">{% for error in form.title.errors %}
-                                    <li>{{ error }}</li>{% endfor %}</ul>
-                            {% endif %}
-
-                        </div>
-
-                        <div class="clear"></div>
-
-                        <div class="col_full">
-                            {{ form.body.label }}
-                            {{ form.body(class='required sm-form-control', rows="6", cols="30") }}
-                            {% if form.title.errors %}
-                                <ul class="errors">{% for error in form.title.errors %}
-                                    <li>{{ error }}</li>{% endfor %}</ul>
-                            {% endif %}
-
-                        </div>
-                        <div class="col_full">
-                            <button class="button button-3d nomargin" type="submit" id="template-contactform-submit"
-                                    name="template-contactform-submit" value="submit">{{ _('Submit') }}
-                            </button>
-                        </div>
-                    </form>
-
-                </div>
-
-
-            </div><!-- Contact Form End -->
-
-
-            <!-- Contact Info
-            ============================================= -->
-            <div class="col_full nobottommargin clearfix">
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-center fbox-bg fbox-plain">
-                        <div class="fbox-icon">
-                            <a href="#"><i class="icon-map-marker2"></i></a>
-                        </div>
-                        <h3>Наша штабквартира<span class="subtitle">{{ config.location }}: {{ config.address }}</span></h3>
-                    </div>
-                </div>
-
-                <div class="col_one_third">
-                    <div class="feature-box fbox-center fbox-bg fbox-plain">
-                        <div class="fbox-icon">
-                            <a href="tel:{{ config.phone_number }}"><i class="icon-phone3"></i></a>
-                        </div>
-                        <h3>Позвонить нам<span class="subtitle">
-                            <a href="tel:{{ config.phone_number }}">{{ config.phone_number }}</a></span></h3>
-                    </div>
-                </div>
-
-                <div class="col_one_third col_last">
-                    <div class="feature-box fbox-center fbox-bg fbox-plain">
-                        <div class="fbox-icon">
-                            <a href="mailto:{{ config.email }}"><i class="icon-email3"></i></a>
-                        </div>
-                        <h3>Написать нам<span class="subtitle">
-                    <a href="mailto:{{ config.email }}">{{ config.email }} <span class="middot">&middot;</span>
-                    </a></span></h3>
-                    </div>
-                </div>
-            </div><!-- Contact Info End -->
-
-        </div>
-
-    </div>
-
 {% endblock content %}

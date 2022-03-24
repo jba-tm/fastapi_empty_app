@@ -65,7 +65,7 @@ class Settings(BaseSettings):
     LOGIN_TEMPLATE: str = 'admin/auth/login.html'
 
     LOGIN_URL = '/auth/login/'
-    LOGIN_REDIRECT = '/admin/user/'
+    LOGIN_REDIRECT = '/admin/'
     LOGOUT_REDIRECT = '/auth/login/'
 
     LANGUAGE_CODE: Optional[str] = 'ru'

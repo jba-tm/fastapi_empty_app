@@ -1,0 +1,86 @@
+{% extends 'dashboard/layout/content.html' %}
+
+{% block app_css %}
+    {{ super() }}
+    <link href="/static/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/static/vendor/quill/quill.bubble.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+    <div class="content-wrap">
+
+        <div class="container clearfix">
+
+            <!-- Post Content
+            ============================================= -->
+            <div class="row clearfix">
+
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h5 class="card-title">{{ title }}</h5>
+                    </div>
+                    <div class="card-body">
+
+                        <form action="" method="post">
+
+                            {{ form.csrf_token }}
+                            <div id="" class="form-group">
+                                {{ form.slug.label }}
+                                <div class="">
+                                    {{ form.slug(class='form-control') }}
+                                </div>
+
+                                {% if form.slug.errors %}
+                                    <ul class="errors">{% for error in form.slug.errors %}
+                                        <li>{{ error }}</li>{% endfor %}</ul>
+                                {% endif %}
+                            </div>
+                            <div id="" class="form-group">
+                                {{ form.title.label }}
+                                <div class="">
+                                    {{ form.title(class='form-control') }}
+                                </div>
+
+                                {% if form.title.errors %}
+                                    <ul class="errors">{% for error in form.title.errors %}
+                                        <li>{{ error }}</li>{% endfor %}</ul>
+                                {% endif %}
+                            </div>
+                            <div id="" class="form-group">
+                                {{ form.content.label }}
+                                <div class="">
+                                    {{ form.content(id='id_content') }}
+                                </div>
+
+                                {% if form.content.errors %}
+                                    <ul class="errors">{% for error in form.content.errors %}
+                                        <li>{{ error }}</li>{% endfor %}</ul>
+                                {% endif %}
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <div class=""><input type="submit" name="submit" value="{{ gettext('Submit') }}"
+                                                     class="btn btn-primary"
+                                                     id="submit-id-submit"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div><!-- .postcontent end -->
+        </div>
+    </div>
+{% endblock %}
+
+{% block app_js %}
+    {{ super() }}
+     <script>
+      tinymce.init({
+        selector: '#id_content'
+      });
+    </script>
+{% endblock %}

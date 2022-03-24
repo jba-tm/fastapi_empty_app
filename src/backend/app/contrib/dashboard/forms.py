@@ -43,24 +43,8 @@ class ConfigForm(ModelForm):
     phone_number = PhoneNumberField(_('Phone number'), validators=[check_phone_number],
                                     display_format='international', )
 
-    counter_line_value_1 = IntegerField(_('Counter line value 1'), )
-    counter_line_name_1 = StringField(_('Counter line name 1'), )
-
-    counter_line_value_2 = IntegerField(_('Counter line value 2'), )
-    counter_line_name_2 = StringField(_('Counter line name 2'), )
-
-    counter_line_value_3 = IntegerField(_('Counter line value 3'), )
-    counter_line_name_3 = StringField(_('Counter line name 3'), )
-
-    counter_line_value_4 = IntegerField(_('Counter line value 4'), )
-    counter_line_name_4 = StringField(_('Counter line name 4'), )
-
     class Meta:
         model = Config
         only = (
             'company_name', 'site_name', 'email', 'phone_number', 'address', 'location',
-            'counter_line_value_1', 'counter_line_name_1',
-            'counter_line_value_2', 'counter_line_name_2',
-            'counter_line_value_3', 'counter_line_name_3',
-            'counter_line_value_4', 'counter_line_name_4',
         )

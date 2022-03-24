@@ -2,60 +2,71 @@
 
 
 {% block content %}
+    <section class="section">
+        <div class="row">
+            <div class="col">
 
-    <div class="content-wrap">
+                <div class="card overflow-visible">
+                    <div class="card-header">
 
-        <div class="container clearfix">
+                        <a href="{{ url_for('user-create-page') }}" class="btn btn-primary btn-sm"><i
+                                class="icon-plus"></i>{{ _('Add') }}</a>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ title }}</h5>
 
-            <!-- Post Content
-            ============================================= -->
-            <div class="row clearfix">
-                <a href="{{ url_for('user-create-page') }}" class="button button-large button-circle button-purple"><i
-                        class="icon-plus"></i>{{ _('Add') }}</a>
+                        <!-- Default Table -->
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>{{ _('Id') }}</th>
+                                <th>{{ _('Email') }}</th>
+                                <th>{{ _('Actions') }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for object in object_list %}
 
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>{{ _('Id') }}</th>
-                        <th>{{ _('Email') }}</th>
-                        <th>{{ _('Actions') }}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for object in object_list %}
+                                <tr>
+                                    <td>{{ object.id }}</td>
+                                    <td>{{ object.email }}</td>
+                                    <td>
+                                        <!-- Example single danger button -->
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-secondary dropdown-toggle"
+                                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                                {{ _("Actions") }}
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item"
+                                                   href="{{ url_for('user-detail-page', email_in=object.email) }}">{{ _('View') }}</a></li>
+                                                <li>
 
-                        <tr>
-                            <td>{{ object.id }}</td>
-                            <td>{{ object.email }}</td>
-                            <td>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-secondary dropdown-toggle"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        {{ _("Actions") }}
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item"
-                                           href="{{ url_for('user-detail-page', email_in=object.email) }}">{{ _('View') }}</a>
-                                        <a class="dropdown-item"
-                                           href="{{ url_for('user-update-page', email_in=object.email) }}">{{ _('Edit') }}</a>
-                                        <a class="dropdown-item"
-                                           href="{{ url_for('user-delete', email_in=object.email) }}">{{ _('Delete') }}</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    {% endfor %}
-
-                    </tbody>
-                </table>
+                                                <a class="dropdown-item"
+                                                   href="{{ url_for('user-update-page', email_in=object.email) }}">{{ _('Edit') }}</a></li>
 
 
-            </div><!-- .postcontent end -->
-            <div class="row">
-                <div class="col">
-                    {% include 'partials/pagination.html' %}
+                                                <li>
+                                                <a class="dropdown-item"
+                                                   href="{{ url_for('user-delete', email_in=object.email) }}">{{ _('Delete') }}</a></li>
+                                            </ul>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+                            </tbody>
+                        </table>
+                        <!-- End Default Table Example -->
+                    </div>
+                    <div class="card-footer">
+                        {% include 'partials/pagination.html' %}
+                    </div>
                 </div>
             </div>
+
         </div>
-    </div>
+    </section>
+
 {% endblock %}
